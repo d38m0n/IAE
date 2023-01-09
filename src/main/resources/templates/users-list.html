@@ -1,34 +1,45 @@
 <!DOCTYPE html>
 <html lang="en">
-<!--<link rel="stylesheet" type="text/css" th:href="@{/mystyle.css}" href="../static/mystyle.css">-->
+
+<link rel="stylesheet" type="text/css"
+      th:href="@{/users-table.css}"
+      href="../static/users-table.css">
 <head>
     <meta charset="UTF-8">
     <title>Admin Panel</title>
 </head>
 <body>
-<table class="table table-striped table-bordered">
-    <thead class="thead-dark">
-    <tr>
-        <th>User ID</th>
-        <th>E-mail</th>
-        <th>First Name</th>
-        <th>Last Name</th>
-        <th>Roles</th>
-        <th></th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr th:each="user: ${listUsers}">
-        <td th:text="${user.id}">User ID</td>
-        <td th:text="${user.email}">E-mail</td>
-        <td th:text="${user.firstName}">First Name</td>
-        <td th:text="${user.lastName}">Last Name</td>
-        <td th:text="${user.roles}">Roles</td>
-        <td><a th:href="@{/users/edit/{id}(id=${user.id})}">Edit</a></td>
-        <td><a th:href="@{/users/delete/{id}(id=${user.id})}"
-               onclick="return confirm('Are you sure you want to delete this user?');">Delete</a></td>
-    </tr>
-    </tbody>
-</table>
+
+<div class="container">
+    <h2>Users Admin Panel</h2>
+    <ul class="responsive-table">
+        <li class="table-header">
+            <div class="col col-1">Created</div>
+            <div class="col col-2">E-mail</div>
+            <div class="col col-3">First Name</div>
+            <div class="col col-4">Last Name</div>
+            <div class="col col-5">Roles</div>
+            <div class="col col-6">Options</div>
+        </li>
+
+        <li class="table-row" th:each="user: ${listUsers}">
+            <div class="col col-1" data-label="Created">Created</div>
+            <div class="col col-2" data-label="E-mai" th:text="${user.email}">Email</div>
+            <div class="col col-3" data-label="First Name" th:text="${user.firstName}">Name</div>
+            <div class="col col-4" data-label="Last Name" th:text="${user.lastName}">SureName</div>
+            <div class="col col-5" data-label="Last Name">
+                <label th:block th:each="role: ${user.roles}">
+                    <span th:text="${role.name}">Roles</span>
+                </label>
+            </div>
+            <div class="col col-6" data-label="Edit"><a th:href="@{/users/edit/{id}(id=${user.id})}">Edit</a> <a
+                    th:href="@{/users/delete/{id}(id=${user.id})}"
+                    onclick="return confirm('Are you sure you want to delete this user?');">Delete</a></div>
+
+        </li>
+    </ul>
+</div>
+
+
 </body>
 </html>

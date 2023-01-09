@@ -1,9 +1,9 @@
 package com.d38m0n.IAE.service;
 
-import com.d38m0n.IAE.entity.RoleEntity;
-import com.d38m0n.IAE.entity.UserEntity;
-import com.d38m0n.IAE.repository.RoleRepository;
-import com.d38m0n.IAE.repository.UserRepository;
+import com.d38m0n.IAE.entity.RoleE;
+import com.d38m0n.IAE.entity.UserE;
+import com.d38m0n.IAE.repository.RoleRepo;
+import com.d38m0n.IAE.repository.UserRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,30 +12,34 @@ import java.util.List;
 @Service
 public class UserService {
 
-    @Autowired
-    private UserRepository userRepo;
+    private final UserRepo userRepo;
 
-    @Autowired
-    RoleRepository roleRepo;
+    final
+    RoleRepo roleRepo;
+
+    public UserService(UserRepo userRepo, RoleRepo roleRepo) {
+        this.userRepo = userRepo;
+        this.roleRepo = roleRepo;
+    }
 
 
-    public List<UserEntity> listAll() {
+    public List<UserE> listAll() {
         return userRepo.findAll();
     }
 
-    public void save(UserEntity user) {
+    public void save(UserE user) {
         userRepo.save(user);
     }
 
-    public UserEntity get(String id) {
+    public UserE get(String id) {
         return userRepo.findById(id).orElseThrow();
     }
 
-    public List<RoleEntity> listRoles() {
+    public List<RoleE> listRoles() {
         return roleRepo.findAll();
     }
 
     public void delete(String id) {
-      userRepo.deleteById(id);
+        userRepo.deleteById(id);
     }
 }

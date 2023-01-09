@@ -1,16 +1,16 @@
 package com.d38m0n.IAE.entity;
 
+import org.hibernate.annotations.GenericGenerator;
 
-import java.util.Date;
+import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
-import javax.persistence.*;
 
 @Entity
-@Table(name = "users")
-public class UserEntity {
+public class UserE {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(generator="system-uuid")
+    @GenericGenerator(name="system-uuid", strategy = "uuid")
     private String id;
 
     @Column(nullable = false, unique = true, length = 45)
@@ -31,12 +31,12 @@ public class UserEntity {
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id")
     )
-    private Set<RoleEntity> roles = new HashSet<>();
+    private Set<RoleE> roles = new HashSet<>();
 
-    public UserEntity() {
+    public UserE() {
     }
 
-    public void addRole(RoleEntity role) {
+    public void addRole(RoleE role) {
         this.roles.add(role);
     }
 
@@ -81,11 +81,11 @@ public class UserEntity {
         this.lastName = lastName;
     }
 
-    public Set<RoleEntity> getRoles() {
+    public Set<RoleE> getRoles() {
         return roles;
     }
 
-    public void setRoles(Set<RoleEntity> roles) {
+    public void setRoles(Set<RoleE> roles) {
         this.roles = roles;
     }
 }

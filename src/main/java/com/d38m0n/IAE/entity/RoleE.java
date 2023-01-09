@@ -1,38 +1,21 @@
 package com.d38m0n.IAE.entity;
 
 import javax.persistence.*;
-import java.util.Collection;
 
 @Entity
-@Table(name = "ROLES")
-public class RoleEntity {
+public class RoleE {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
     @Column(nullable = false, length = 45)
     private String name;
 
-    public RoleEntity() {
+    public RoleE() {
     }
 
-    public RoleEntity(String name) {
+    public RoleE(String name) {
         this.name = name;
-    }
-
-    public RoleEntity(Integer id, String name) {
-        this.id = id;
-        this.name = name;
-    }
-
-    public RoleEntity(Integer id) {
-        this.id = id;
-    }
-
-
-    @Override
-    public String toString() {
-        return this.name;
     }
 
     public int getId() {
@@ -51,4 +34,3 @@ public class RoleEntity {
         this.name = name;
     }
 }
-
